@@ -15,8 +15,8 @@ height = 42.0
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("2_blf5q")
-_speed = 300.0
-_detectionRange = 300.0
+_speed = 200.0
+_detectionRange = 400.0
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(0.219608, 1, 0.2, 1)
@@ -41,5 +41,3 @@ HealthComponent = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
 position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_exufp")
-
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

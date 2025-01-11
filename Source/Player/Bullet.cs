@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Bullet : Node2D
+public partial class Bullet : Area2D
 {
 	[Export] public Vector2 Velocity { get; set; } // Velocity of the bullet
 
@@ -10,4 +10,12 @@ public partial class Bullet : Node2D
         // Move the bullet
         Position += Velocity * (float)delta;
     }
+	private void DealDamage(Area2D area)
+	{
+		if (area is HitboxComponent)
+        {
+            HitboxComponent hitbox = (HitboxComponent)area;
+            hitbox.Damage(50);
+        }
+	}
 }

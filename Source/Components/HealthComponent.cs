@@ -22,5 +22,9 @@ public partial class HealthComponent : Node2D
 		{
 			_healthBar.Value = CurrentHealth;
 		}
+		if (CurrentHealth <= 0)
+		{
+			GetParent().QueueFree();
+		}
 	}
 }
