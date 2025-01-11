@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxptqw2a7bvsa"]
+[gd_scene load_steps=5 format=3 uid="uid://cxptqw2a7bvsa"]
 
 [ext_resource type="PackedScene" uid="uid://cmgrowyg3cs0r" path="res://Source/Enemies/Neptun.tscn" id="1_c7el5"]
 [ext_resource type="Script" path="res://Source/Enemies/NeptunGreen.cs" id="2_blf5q"]
@@ -7,7 +7,13 @@
 radius = 6.0
 height = 42.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_exufp"]
+radius = 6.0
+height = 42.0
+
 [node name="NeptunGreen" instance=ExtResource("1_c7el5")]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("2_blf5q")
 _speed = 300.0
 _detectionRange = 300.0
@@ -18,3 +24,22 @@ scale = Vector2(0.1, 0.1)
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_ue7n2")
+
+[node name="HealthComponent" parent="." index="2"]
+MaxHealth = 100.0
+
+[node name="ProgressBar" parent="HealthComponent" index="0"]
+offset_left = -31.0
+offset_top = -32.0
+offset_right = 31.0
+offset_bottom = -23.0
+
+[node name="HitboxComponent" parent="." index="3" node_paths=PackedStringArray("HealthComponent")]
+collision_layer = 4
+HealthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_exufp")
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

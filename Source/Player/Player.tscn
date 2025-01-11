@@ -22,13 +22,22 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_n2o0e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 10)
 shape = SubResource("CapsuleShape2D_twmuy")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_tlbww")]
 
+[node name="HealthBar" type="ProgressBar" parent="HealthComponent"]
+modulate = Color(0, 0.677058, 1.92523e-07, 1)
+offset_left = -45.0
+offset_top = -57.0
+offset_right = 46.0
+offset_bottom = -46.0
+theme_override_font_sizes/font_size = 11
+show_percentage = false
+
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") instance=ExtResource("4_j4tf2")]
+collision_layer = 2
 HealthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

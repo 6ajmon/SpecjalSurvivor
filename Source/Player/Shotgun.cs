@@ -81,7 +81,9 @@ public partial class Shotgun : Node2D
 
         // Instantiate the bullet
         Node2D bullet = (Node2D)_bulletScene.Instantiate();
-        GetParent().AddChild(bullet); // Add the bullet to the scene
+		//add child to root node
+		GetTree().Root.AddChild(bullet);
+
 
         // Set the bullet's position and rotation to match the gun
         bullet.GlobalPosition = _marker.GlobalPosition;

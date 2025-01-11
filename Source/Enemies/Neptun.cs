@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Neptun : CharacterBody2D
+public partial class Neptun : Area2D
 {
     public float Speed = 0f; // Movement speed of the enemy
     public float DetectionRange = 0f; // Range within which the enemy detects the player
@@ -40,19 +40,23 @@ public partial class Neptun : CharacterBody2D
         if (_isChasing)
         {
             Vector2 direction = (_player.Position - Position).Normalized();
-            Velocity = direction * Speed;
+            Position += direction * Speed * (float)delta; // Update position manually
         }
-        else
-        {
-            Velocity = Vector2.Zero;
-        }
-
-        MoveAndSlide();
     }
 
     public override void _Draw()
     {
         // Optional: Draw detection range for debugging
         DrawCircle(Vector2.Zero, DetectionRange, new Color(1, 0, 0, 0.2f));
+    }
+
+    // deal contact damage to the player
+    public virtual void OnAreaEntered(Area2D area)
+    {
+        if (area is HitboxComponent)
+        {
+            HitboxComponent hitbox = (HitboxComponent)area;
+            hitbox.Damage(10);
+        }
     }
 }
