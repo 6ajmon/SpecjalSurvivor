@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmgrowyg3cs0r"]
 
-[ext_resource type="Script" path="res://Components/Enemies/Neptun.cs" id="1_oxkx1"]
+[ext_resource type="Script" path="res://Source/Enemies/Neptun.cs" id="1_oxkx1"]
 [ext_resource type="Texture2D" uid="uid://dwmyooxaflc2" path="res://Assets/neptun_top-removebg-preview.png" id="2_oa6k1"]
 
 [node name="Neptun" type="CharacterBody2D"]

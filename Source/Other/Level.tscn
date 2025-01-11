@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=4 uid="uid://cwi868r6unxry"]
 
 [ext_resource type="Texture2D" uid="uid://vpfr2u106m53" path="res://Assets/dungeon_tiles.png" id="1_8jux0"]
-[ext_resource type="Script" path="res://Components/Other/Level.cs" id="1_vhrcx"]
-[ext_resource type="PackedScene" uid="uid://bbwkba2r15xlu" path="res://Components/Player/Player.tscn" id="3_t28mf"]
-[ext_resource type="PackedScene" uid="uid://cxptqw2a7bvsa" path="res://Components/Enemies/NeptunGreen.tscn" id="4_g83an"]
+[ext_resource type="Script" path="res://Source/Other/Level.cs" id="1_vhrcx"]
+[ext_resource type="PackedScene" uid="uid://bbwkba2r15xlu" path="res://Source/Player/Player.tscn" id="3_t28mf"]
+[ext_resource type="PackedScene" uid="uid://cxptqw2a7bvsa" path="res://Source/Enemies/NeptunGreen.tscn" id="4_g83an"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0aa8r"]
 texture = ExtResource("1_8jux0")
@@ -301,10 +301,10 @@ limit_left = -16
 limit_top = -16
 limit_right = 1536
 limit_bottom = 732
+position_smoothing_enabled = true
+position_smoothing_speed = 12.0
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 
 [node name="NeptunGreen" parent="EnemySpawner" instance=ExtResource("4_g83an")]
 position = Vector2(199, 215)
-_speed = 300.0
-_detectionRange = 300.0
