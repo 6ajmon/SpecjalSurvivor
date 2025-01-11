@@ -84,25 +84,26 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5g6f8")
 }],
-"loop": true,
-"name": &"default",
+"loop": false,
+"name": &"shoot",
 "speed": 20.0
 }]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_y8rmp")
 _bulletScene = ExtResource("3_uw8in")
+_bulletSpeed = 800.0
 _fireRate = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(54, 0)
 sprite_frames = SubResource("SpriteFrames_o48ly")
-frame = 6
-frame_progress = 0.328322
+animation = &"shoot"
 
 [node name="BulletSpawnPoint" type="Marker2D" parent="AnimatedSprite2D"]
 position = Vector2(29, -3)
 
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinished"]
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

@@ -9,6 +9,7 @@ public partial class Shotgun : Node2D
 	private Marker2D _marker;
 	private Timer _timer;
 	private bool _canShoot = true;
+	private AnimatedSprite2D _animatedSprite2D;
 
 	public override void _Ready()
 	{
@@ -16,6 +17,8 @@ public partial class Shotgun : Node2D
 		_timer = GetNode<Timer>("Timer");
 		_timer.Timeout += OnTimerTimeout;
 		_timer.WaitTime = _fireRate;
+		_animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		_animatedSprite2D.AnimationFinished += OnAnimationFinished;
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -46,6 +49,16 @@ public partial class Shotgun : Node2D
 
         // Set the gun's rotation
         Rotation = angle;
+		if (mousePosition.X < GlobalPosition.X)
+        {
+            // Mouse is on the left side of the player
+            _animatedSprite2D.FlipV = true;
+        }
+        else
+        {
+            // Mouse is on the right side of the player
+            _animatedSprite2D.FlipV = false;
+        }
     }
 
 	private void OnTimerTimeout()
@@ -58,6 +71,12 @@ public partial class Shotgun : Node2D
         {
             GD.PrintErr("Bullet scene is not assigned!");
             return;
+        }
+
+		// Play the shoot animation
+        if (_animatedSprite2D != null)
+        {
+            _animatedSprite2D.Play("shoot"); // Replace "shoot" with the name of your animation
         }
 
         // Instantiate the bullet
@@ -74,4 +93,10 @@ public partial class Shotgun : Node2D
             bulletScript.Velocity = new Vector2(Mathf.Cos(Rotation), Mathf.Sin(Rotation)) * _bulletSpeed;
         }
     }
+
+	private void OnAnimationFinished()
+	{
+		// return to first frame
+		_animatedSprite2D.Frame = 0;
+	}
 }
