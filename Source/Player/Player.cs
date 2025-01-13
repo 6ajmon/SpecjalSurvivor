@@ -7,6 +7,7 @@ public partial class Player : CharacterBody2D
     [Export] public float DashSpeed = 500f; // Speed during a dash
     [Export] public float DashDuration = 0.2f; // Duration of the dash in seconds
     [Export] public float DashCooldown = 1.0f; // Cooldown between dashes in seconds
+    [Export] private Curve _dashCurve;
 
     private Vector2 _velocity = Vector2.Zero;
     private bool _isDashing = false;
@@ -40,6 +41,17 @@ public partial class Player : CharacterBody2D
         {
             // Dash logic
             _dashTime -= (float)delta;
+
+            // Calculate the normalized dash progress (from 0 to 1)
+            float dashProgress = 1f - (_dashTime / DashDuration);
+
+            // Sample the curve to get the speed multiplier
+            float speedMultiplier = _dashCurve?.Sample(dashProgress) ?? 1f;
+
+            // Adjust the dash speed based on the curve
+            _velocity = _velocity.Normalized() * DashSpeed * speedMultiplier;
+
+            // End the dash
             if (_dashTime <= 0)
             {
                 _isDashing = false;
