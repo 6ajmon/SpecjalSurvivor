@@ -7,6 +7,7 @@ public partial class HealthComponent : Node2D
 	[Export] public float MaxHealth = 100;
 	public float CurrentHealth;
 	private ProgressBar _healthBar;
+
 	public override void _Ready()
 	{
 		CurrentHealth = MaxHealth;
@@ -24,7 +25,19 @@ public partial class HealthComponent : Node2D
 		}
 		if (CurrentHealth <= 0)
 		{
-			GetParent().QueueFree();
+			var Parent = GetParent();
+			if (Parent is Neptun)
+			{
+				var gameEvents = GetNode<GameEvents>("/root/GameEvents");
+				gameEvents.EmitSignal(GameEvents.SignalName.EnemyKilled);
+				Parent.QueueFree();
+
+			}
+			if (Parent is Player)
+			{
+				var gameEvents = GetNode<GameEvents>("/root/GameEvents");
+				gameEvents.PlayerDied();
+			}
 		}
 	}
 }

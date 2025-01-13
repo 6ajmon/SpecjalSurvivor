@@ -18,4 +18,8 @@ public partial class Bullet : Area2D
             hitbox.Damage(50);
         }
 	}
+    private void LifespanTimeout()
+    {
+        QueueFree();
+    }
 }

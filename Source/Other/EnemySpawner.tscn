@@ -7,6 +7,7 @@
 script = ExtResource("1_rm4e3")
 _enemyScene = ExtResource("2_7wflc")
 _enemiesPerWave = 6
-_timeBetweenWaves = 15.0
+_timeBetweenWaves = 12.0
 _timeBetweenSpawns = 2.0
+_maxWaves = 64
 _spawnRadius = 400.0

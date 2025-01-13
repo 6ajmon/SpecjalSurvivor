@@ -11,8 +11,4 @@ public partial class NeptunGreen : Neptun
 		DetectionRange = _detectionRange;
 		base._Ready();
 	}
-	public override void OnAreaEntered(Area2D area)
-	{
-		base.OnAreaEntered(area);
-	}
 }
