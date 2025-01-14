@@ -2,4 +2,4 @@
 .godot/
 /android/
 .vscode/
-backup-repo/
+export_presets.cfg
