@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmgrowyg3cs0r"]
+
+[ext_resource type="Script" path="res://Source/Enemies/Neptun.cs" id="1_oxkx1"]
+[ext_resource type="Texture2D" uid="uid://dwmyooxaflc2" path="res://Assets/neptun_top-removebg-preview.png" id="2_oa6k1"]
+[ext_resource type="PackedScene" uid="uid://bxinfo4gwh6ob" path="res://Source/Components/HealthComponent.tscn" id="3_q3hgi"]
+[ext_resource type="PackedScene" uid="uid://b4a850h8qsfr3" path="res://Source/Components/HitboxComponent.tscn" id="4_hp667"]
+
+[node name="Neptun" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_oxkx1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_oa6k1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_q3hgi")]
+MaxHealth = 0.0
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthComponent"]
+modulate = Color(0.780694, 4.54836e-06, 4.81307e-07, 1)
+offset_left = -39.0
+offset_top = -55.0
+offset_right = 39.0
+offset_bottom = -46.0
+show_percentage = false
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_hp667")]
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

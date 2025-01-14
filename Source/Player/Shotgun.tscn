@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=3 uid="uid://bdsjy3mrefqd8"]
+
+[ext_resource type="Texture2D" uid="uid://br7uxg6mwi3y2" path="res://Assets/Shotgun animation X.png" id="1_dlkxe"]
+[ext_resource type="Script" path="res://Source/Player/Shotgun.cs" id="1_y8rmp"]
+[ext_resource type="PackedScene" uid="uid://5og8leq5hfky" path="res://Source/Player/Bullet.tscn" id="3_uw8in"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_capyi"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stsdj"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfimv"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3ag8"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8737i"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwf1p"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk6nc"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duhsn"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h2b3"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyagr"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g6f8"]
+atlas = ExtResource("1_dlkxe")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o48ly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_capyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stsdj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfimv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3ag8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8737i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwf1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk6nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_duhsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2h2b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyagr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g6f8")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 20.0
+}]
+
+[node name="Shotgun" type="Node2D"]
+script = ExtResource("1_y8rmp")
+_bulletScene = ExtResource("3_uw8in")
+_bulletSpeed = 800.0
+_fireRate = 1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(54, 0)
+sprite_frames = SubResource("SpriteFrames_o48ly")
+animation = &"shoot"
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(29, -3)
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinished"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

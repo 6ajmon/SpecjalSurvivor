@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfkf3gvhllbou"]
+
+[ext_resource type="Script" path="res://Source/Other/EnemySpawner.cs" id="1_rm4e3"]
+[ext_resource type="PackedScene" uid="uid://cxptqw2a7bvsa" path="res://Source/Enemies/NeptunGreen.tscn" id="2_7wflc"]
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_rm4e3")
+_enemyScene = ExtResource("2_7wflc")
+_enemiesPerWave = 6
+_timeBetweenWaves = 12.0
+_timeBetweenSpawns = 2.0
+_maxWaves = 64
+_spawnRadius = 400.0
