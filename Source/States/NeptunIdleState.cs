@@ -9,19 +9,32 @@ public partial class NeptunIdleState : State
     Vector2 moveDirection = Vector2.Zero;
     float wanderTime = 0f;
     float waitTime = 0f;
+    Timer timer;
     Player player;
+
+    private void OnTimerTimeout()
+    {
+        randomizeWander();
+    }
 
     private void randomizeWander(){
         moveDirection = new Vector2((float)GD.RandRange(-1, 1), (float)GD.RandRange(-1, 1)).Normalized();
         wanderTime = (float)GD.RandRange(1, 3);
-        waitTime = (float)GD.RandRange(0.5, 2);
+        waitTime = (float)GD.RandRange(1, 3);
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        timer = new Timer();
+        AddChild(timer);
         randomizeWander();
         player = GetTree().GetFirstNodeInGroup("player") as Player;
+
+        timer.Timeout += OnTimerTimeout;
+        timer.WaitTime = waitTime;
+        timer.OneShot = false;
     }
     public override void Exit()
     {
@@ -36,19 +49,12 @@ public partial class NeptunIdleState : State
             wanderTime -= delta;
             if (wanderTime <= 0)
             {
-                if (waitTime > 0)
-                {
-                    waitTime -= delta;
-                    if (waitTime <= 0)
-                    {
-                        randomizeWander();
-                    }
-                }
-                else
-                {
-                    randomizeWander();
-                }
+                timer.Start();
             }
+        }
+        else
+        {
+            timer.Start();
         }
     }
     public override void PhysicsUpdate(float delta)
