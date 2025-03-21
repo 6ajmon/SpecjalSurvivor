@@ -16,28 +16,28 @@ public partial class Neptun : Area2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_player == null)
-		{
-			GD.PrintErr("Player not found!");
-            return;
-		}
+        // if (_player == null)
+		// {
+		// 	GD.PrintErr("Player not found!");
+        //     return;
+		// }
 
-        float distanceToPlayer = Position.DistanceTo(_player.Position);
+        // float distanceToPlayer = Position.DistanceTo(_player.Position);
 
-        if (distanceToPlayer <= DetectionRange)
-        {
-            _isChasing = true;
-        }
-        else
-        {
-            _isChasing = false;
-        }
+        // if (distanceToPlayer <= DetectionRange)
+        // {
+        //     _isChasing = true;
+        // }
+        // else
+        // {
+        //     _isChasing = false;
+        // }
 
-        if (_isChasing)
-        {
-            Vector2 direction = (_player.Position - Position).Normalized();
-            Position += direction * Speed * (float)delta;
-        }
+        // if (_isChasing)
+        // {
+        //     Vector2 direction = (_player.Position - Position).Normalized();
+        //     Position += direction * Speed * (float)delta;
+        // }
     }
 
     public override void _Draw()
