@@ -2,18 +2,18 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class StateMachine : Node
+public partial class NeptunStateMachine : Node
 {
 
 	[Export] private State initialState;
 	private State currentState;
 	private Dictionary<string, State> _states = new();
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		foreach (var child in GetChildren())
 		{
+			// zakładamy takie podejście, że stany są dodawane jako dzieci
 			if (child is State state)
 			{
 				_states.Add(state.Name.ToString().ToLower(), state);
@@ -27,7 +27,6 @@ public partial class StateMachine : Node
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (currentState != null)
@@ -43,6 +42,8 @@ public partial class StateMachine : Node
 			currentState.PhysicsUpdate((float)delta);
 		}
     }
+
+	// Metoda zmieniająca stan
 	private void OnChildTransitioned(State state, string newStateName)
 	{
 		if (state != currentState)

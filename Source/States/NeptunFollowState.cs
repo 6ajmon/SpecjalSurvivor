@@ -6,8 +6,8 @@ public partial class NeptunFollowState : State
 	[Export] private Neptun _neptun;
 	private Player _player;
 	private Vector2 _direction;
-	[Export] private float moveSpeed = 100f;
-	[Export] private float detectionRange = 200f;
+	[Export] private float moveSpeed = 160f;
+	[Export] private float detectionRange = 300f;
 	[Export] private float ChasingTime = 3f;
 	private float chasingTime = 3f;
 
@@ -18,7 +18,6 @@ public partial class NeptunFollowState : State
 
 		chasingTime = ChasingTime;
 
-		
 	}
 
 	public override void Exit()

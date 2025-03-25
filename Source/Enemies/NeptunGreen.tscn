@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cmgrowyg3cs0r" path="res://Source/Enemies/Neptun.tscn" id="1_c7el5"]
 [ext_resource type="Script" path="res://Source/Enemies/NeptunGreen.cs" id="2_blf5q"]
 [ext_resource type="Script" path="res://Source/States/NeptunIdleState.cs" id="3_o8p8c"]
-[ext_resource type="Script" path="res://Source/Enemies/NeptunFollowState.cs" id="4_x2ael"]
-[ext_resource type="Script" path="res://Source/Enemies/NeptunDashState.cs" id="5_f5l36"]
+[ext_resource type="Script" path="res://Source/States/NeptunFollowState.cs" id="5_008ao"]
+[ext_resource type="Script" path="res://Source/States/NeptunDashState.cs" id="6_n2f38"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ue7n2"]
 radius = 6.0
@@ -49,14 +49,11 @@ initialState = NodePath("Idle")
 [node name="Idle" type="Node" parent="State Machine" index="0" node_paths=PackedStringArray("neptun")]
 script = ExtResource("3_o8p8c")
 neptun = NodePath("../..")
-moveSpeed = 60.0
 
 [node name="Follow" type="Node" parent="State Machine" index="1" node_paths=PackedStringArray("_neptun")]
-script = ExtResource("4_x2ael")
+script = ExtResource("5_008ao")
 _neptun = NodePath("../..")
-moveSpeed = 200.0
-detectionRange = 300.0
 
 [node name="Dash" type="Node" parent="State Machine" index="2" node_paths=PackedStringArray("neptun")]
-script = ExtResource("5_f5l36")
+script = ExtResource("6_n2f38")
 neptun = NodePath("../..")

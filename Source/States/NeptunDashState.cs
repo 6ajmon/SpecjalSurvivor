@@ -5,8 +5,8 @@ public partial class NeptunDashState : State
 {
 	[Export] private Neptun neptun;
     [Export] private float DashSpeed = 1000f;
-	[Export] private float ChargeTime = 1f;
-	[Export] private float DashTime = 1f;
+	[Export] private float ChargeTime = 0.5f;
+	[Export] private float DashTime = 0.5f;
 	private Vector2 direction;
 	private Player player;
 	private float dashSpeed = 1000f;

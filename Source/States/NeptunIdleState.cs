@@ -5,7 +5,7 @@ public partial class NeptunIdleState : State
 
 
     [Export] Neptun neptun;
-    [Export] float moveSpeed = 100f;
+    [Export] float moveSpeed = 60f;
     Vector2 moveDirection = Vector2.Zero;
     float wanderTime = 0f;
     float waitTime = 0f;
@@ -52,10 +52,6 @@ public partial class NeptunIdleState : State
                 timer.Start();
             }
         }
-        else
-        {
-            timer.Start();
-        }
     }
     public override void PhysicsUpdate(float delta)
     {
@@ -66,13 +62,18 @@ public partial class NeptunIdleState : State
             GD.PrintErr("Neptun not found!");
             return;
         }
-        neptun.Position += moveDirection * moveSpeed * delta;
+
+        if (wanderTime > 0)
+        {
+            neptun.Position += moveDirection * moveSpeed * delta;
+        }
 
         if (player != null)
         {
             Vector2 direction = player.GlobalPosition - neptun.GlobalPosition;
             if (direction.Length() < 200)
             {
+                // tutaj zmieniamy stan na "follow", ponieważ tak nazywa się dziecko w drzewie sceny
                 EmitSignal(nameof(Transitioned), this, "follow");
             }
         }
