@@ -16,7 +16,7 @@ height = 56.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0l31b"]
 height = 56.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_b35bg")
 Speed = 400.0
 DashSpeed = 1000.0
